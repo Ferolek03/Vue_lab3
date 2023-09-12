@@ -58,6 +58,27 @@ Vue.component('column1', {
     `,
 })
 
+Vue.component('column2', {
+    props: {
+        secondCol: {
+            type: Array,
+            required: true
+        }
+    },
+    data() {
+        return {}
+    },
+    methods: {},
+    template: `
+     <div>
+        <span class="col-title">In Work</span>
+        <note v-for="(note, index) in secondCol" @save="save()" :secondCol="secondCol" :key="note.key" :idNote="index" :note="note">
+            
+        </note>
+    </div>
+    `,
+})
+
 
 
 Vue.component('create-form', {
