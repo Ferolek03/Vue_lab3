@@ -12,7 +12,7 @@ Vue.component('container', {
     },
     methods: {},
     mounted() {
-        
+
 
     },
     template: `
@@ -25,6 +25,35 @@ Vue.component('container', {
             <column3 v-if="!isEdit" class="column column3" :thirdCol="thirdCol"></column3>
             <column4 v-if="!isEdit" class="column column4" :fourthCol="fourthCol"></column4>
         </div>
+    </div>
+    `,
+})
+
+Vue.component('column1', {
+    props: {
+        firstCol: {
+            type: Array,
+            required: true
+        },
+    },
+    data() {
+        return {}
+    },
+    mounted() {
+        eventBus.$on('on-submit', createNote => {
+            this.firstCol.push(createNote)
+        });
+        eventBus.$on('delete-note', idNote => {
+            this.firstCol.splice(idNote, 1)
+        })
+    },
+    methods: {},
+    template: `
+     <div>
+        <span class="col-title">Planned Tasks</span>
+        <note v-for="(note, index) in firstCol" @save="save()" :firstCol="firstCol" :key="note.key" :idNote="index" :note="note">
+            
+        </note>
     </div>
     `,
 })
