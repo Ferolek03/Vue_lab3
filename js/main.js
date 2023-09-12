@@ -100,6 +100,28 @@ Vue.component('column3', {
     `,
 })
 
+Vue.component('column4', {
+    props: {
+        fourthCol: {
+            type: Array,
+            required: true
+        }
+    },
+    data() {
+        return {}
+    },
+    methods: {},
+    template: `
+     <div>
+        <span class="col-title">Done Tasks</span>
+        <note v-for="(note, index) in fourthCol" @save="save()" :fourthCol="fourthCol" :key="note.key" :idNote="index" :note="note">
+            
+        </note>
+    </div>
+    `,
+})
+
+
 
 
 Vue.component('create-form', {
