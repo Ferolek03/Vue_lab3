@@ -121,7 +121,61 @@ Vue.component('column4', {
     `,
 })
 
-
+Vue.component('edit', {
+    methods: {
+        formEdit() {
+            if (this.title || this.description || this.deadlineTime || this.deadlineDate) {
+                let DateTime = new Date();
+                let editNote = {
+                    title: this.title,
+                    description: this.description,
+                    deadlineDate: this.deadlineDate,
+                    deadlineTime: this.deadlineTime,
+                    editTime: DateTime.getHours() + ':' + DateTime.getMinutes(),
+                    editDate: DateTime.getFullYear() + '-' + Number(DateTime.getMonth() + 1) + '-' + DateTime.getDate()
+                }
+                eventBus.$emit('edit-done', editNote);
+            } else {
+                let editNote = {}
+                eventBus.$emit('edit-done', editNote)
+            }
+            this.title = null;
+            this.description = null;
+            this.deadlineDate = null;
+            this.deadlineTime = null;
+            this.editTime = null;
+            this.editDate = null;
+        }
+    },
+    mounted() {
+    },
+    data() {
+        return {
+            title: null,
+            description: null,
+            editTime: null,
+            editDate: null,
+            deadlineDate: null,
+            deadlineTime: null,
+        }
+    },
+    template: `
+<div class="form-container">
+    <form class="create-form edit-form" @submit.prevent="formEdit">
+        <label>Edit Todo</label>
+        <input type="text" v-model="title" placeholder="new title">
+        <label>Description</label>
+        <input type="text" v-model="description" placeholder="new description">
+        <label>DeadLine</label>
+        <div class="date-input">
+            <input type="date" v-model="deadlineDate">
+            <input type="time" v-model="deadlineTime">
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+</div>
+    `
+})
 
 
 Vue.component('create-form', {
