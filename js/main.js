@@ -73,6 +73,27 @@ Vue.component('column2', {
      <div>
         <span class="col-title">In Work</span>
         <note v-for="(note, index) in secondCol" @save="save()" :secondCol="secondCol" :key="note.key" :idNote="index" :note="note">
+          
+        </note>
+    </div>
+    `,
+})
+
+Vue.component('column3', {
+    props: {
+        thirdCol: {
+            type: Array,
+            required: true
+        }
+    },
+    data() {
+        return {}
+    },
+    methods: {},
+    template: `
+     <div>
+        <span class="col-title">Testing</span>
+        <note v-for="(note, index) in thirdCol" @save="save()" :thirdCol="thirdCol" :key="note.key" :idNote="index" :note="note">
             
         </note>
     </div>
