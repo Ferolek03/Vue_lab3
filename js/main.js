@@ -94,7 +94,7 @@ Vue.component('column1', {
     methods: {},
     template: `
      <div>
-        <span class="col-title">Planned Tasks</span>
+        <span class="col-title">Запланированные задачи</span>
         <note v-for="(note, index) in firstCol" @save="save()" :firstCol="firstCol" :key="note.key" :idNote="index" :note="note">
             
         </note>
@@ -115,7 +115,7 @@ Vue.component('column2', {
     methods: {},
     template: `
      <div>
-        <span class="col-title">In Work</span>
+        <span class="col-title">Процессе</span>
         <note v-for="(note, index) in secondCol" @save="save()" :secondCol="secondCol" :key="note.key" :idNote="index" :note="note">
           
         </note>
@@ -136,7 +136,7 @@ Vue.component('column3', {
     methods: {},
     template: `
      <div>
-        <span class="col-title">Testing</span>
+        <span class="col-title">Тестируется</span>
         <note v-for="(note, index) in thirdCol" @save="save()" :thirdCol="thirdCol" :key="note.key" :idNote="index" :note="note">
             
         </note>
@@ -157,7 +157,7 @@ Vue.component('column4', {
     methods: {},
     template: `
      <div>
-        <span class="col-title">Done Tasks</span>
+        <span class="col-title">Выполнено</span>
         <note v-for="(note, index) in fourthCol" @save="save()" :fourthCol="fourthCol" :key="note.key" :idNote="index" :note="note">
             
         </note>
@@ -377,15 +377,15 @@ Vue.component('create-form', {
     },
     template: `
     <form class="create-form" @submit.prevent="onSubmit">
-        <label>Create Todo</label>
-        <input v-model.trim="title" type="text" placeholder="title">
-        <input v-model.trim="description" type="text" placeholder="description">
-        <label>Deadline</label>
+        <label>Название таблицы</label>
+        <input v-model.trim="title" type="text" placeholder="Название">
+        <input v-model.trim="description" type="text" placeholder="Описание">
+        <label>Тайм</label>
         <div class="date-input">
             <input type="date" v-model="deadlineDate" required>
             <input type="time" v-model="deadlineTime" required>
         </div>
-        <input type="submit" value="Create">
+        <input type="submit" value="Создать">
     </form>
     `,
 })
