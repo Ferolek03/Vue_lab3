@@ -223,10 +223,10 @@ Vue.component('note', {
         if (this.note.statusCol === 4) {
             if (noteDate[0] >= TimeData.getFullYear() && noteDate[1] >= Number(TimeData.getMonth() + 1)
                 && noteDate[2] >= TimeData.getDay() && noteTime[0] >= TimeData.getHours() && noteTime[1] >= TimeData.getMinutes()) {
-                this.note.isOverdue = 'Completed on time';
+                this.note.isOverdue = 'В срок';
                 this.note.timeCheck = true;
             } else {
-                this.note.isOverdue = 'Not completed on time';
+                this.note.isOverdue = 'Не в срок';
                 this.note.timeCheck = false;
             }
         }
@@ -243,21 +243,21 @@ Vue.component('note', {
             <li v-for="(reason, index) of note.reasons" :index="reason.key">reason - {{ reason }}</li>
         </div>
         <div class="todo-btns">
-            <button v-if="note.statusCol !== 4 && !isReason" @click="editNote(idNote)" class="edit-btn">Edit</button>
-            <button v-if="note.statusCol === 1" @click="deleteNote(idNote)" class="delete-btn">Delete</button>
+            <button v-if="note.statusCol !== 4 && !isReason" @click="editNote(idNote)" class="edit-btn">Редактировать</button>
+            <button v-if="note.statusCol === 1" @click="deleteNote(idNote)" class="delete-btn">Удалить</button>
         </div>
         <div class="date" v-if="note.date">
-            <span>Created at</span>
+            <span>Создан в</span>
             <span>{{ note.date }}</span>
             <span>{{ note.time }}</span>
         </div>
         <div class="deadline">
-            <span>Deadline:</span>
+            <span>Закрывается:</span>
             <span>{{ note.deadlineDate }}</span>
             <span>{{ note.deadlineTime }}</span>
         </div>
         <div v-if="note.editDate" class="deadline">
-            <span>Last edit:</span>
+            <span>Закрывается:</span>
             <span>{{ note.editDate }}</span>
             <span>{{ note.editTime }}</span>
         </div>
@@ -266,8 +266,8 @@ Vue.component('note', {
             <button @click="reasonBack(idNote)">Submit</button>
         </div>
         <div class="btns">
-            <button v-if="note.statusCol === 3" @click="moveBack(idNote)" class="arrow-left">&#8592;</button>
-            <button v-if="note.statusCol !== 4 && !isReason" @click="moveNote(idNote)" class="arrow-right">&#8594;</button>
+            <button v-if="note.statusCol === 3" @click="moveBack(idNote)" class="arrow-left">Назад</button>
+            <button v-if="note.statusCol !== 4 && !isReason" @click="moveNote(idNote)" class="arrow-right">Вперед</button>
         </div>
         <div class="overdue">
             <div v-if="note.isOverdue !== ''"><span :class="{'on-time':note.timeCheck, 'not-on-time':!note.timeCheck}">{{ note.isOverdue }}</span></div>
@@ -316,16 +316,16 @@ Vue.component('edit', {
     template: `
 <div class="form-container">
     <form class="create-form edit-form" @submit.prevent="formEdit">
-        <label>Edit Todo</label>
-        <input type="text" v-model="title" placeholder="new title">
-        <label>Description</label>
-        <input type="text" v-model="description" placeholder="new description">
-        <label>DeadLine</label>
+        <label>Редактирование</label>
+        <input type="text" v-model="title" placeholder="Новое название">
+        <label>Описания</label>
+        <input type="text" v-model="description" placeholder="Новое описание">
+        <label>Время</label>
         <div class="date-input">
             <input type="date" v-model="deadlineDate">
             <input type="time" v-model="deadlineTime">
         </div>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Сохранить">
     </form>
 </div>
     `
