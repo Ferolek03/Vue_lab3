@@ -46,3 +46,296 @@ body {
     order: 2;
 }
 
+.column3 {
+    order: 3;
+}
+
+.column4 {
+    order: 4;
+}
+
+li {
+    list-style: none;
+}
+
+.none {
+    display: none;
+}
+
+.btn-task-add {
+    width: 18px;
+}
+
+.todo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid #808080;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+    min-width: 100px;
+    max-width: 200px;
+}
+
+.create-form {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-form > label:nth-child(4) {
+    margin-top: 10px;
+}
+
+.create-form > input {
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #808080;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.create-form > button {
+    margin-top: 10px;
+    padding: 5px;
+    border-radius: 20px;
+    border: 1px solid #808080;
+    background-color: whitesmoke;
+}
+
+.create-form > input[type="submit"]:hover {
+    background-color: #3a3a3a;
+    color: white;
+    transition-duration: .5s;
+}
+
+.create-form label {
+    color: #7c4e09;
+}
+
+form > input {
+    margin-top: 10px;
+}
+
+.task-count-label {
+    margin-top: 10px;
+}
+
+.todo-title {
+    color: #7c4e09;
+    word-break: break-word;
+    font-weight: 600;
+}
+
+.todo-description {
+    word-break: break-word;
+}
+
+.todo-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.todo-tasks > span {
+    margin-top: 10px;
+}
+
+.task-title-input {
+    border-radius: 20px;
+    border: 1px solid #808080;
+    padding: 5px;
+    width: 120px;
+    margin-right: 5px;
+}
+
+.submit-btn {
+    border-radius: 20px;
+    border: 1px solid #808080;
+    background-color: whitesmoke;
+    width: 20px;
+}
+
+.submit-btn:hover {
+    background-color: #7c4e09;
+    transition-duration: .3s;
+}
+
+.add-task-form {
+    display: flex;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    margin: 5px 10px 5px 5px;
+}
+
+.task-title {
+    margin: 0 10px 0 0;
+    word-break: break-word;
+}
+
+.date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.create-form > span {
+    margin-top: 10px;
+}
+
+.date-input {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.date-input > input {
+    border-radius: 20px;
+    border: 1px solid #808080;
+    padding: 10px;
+    margin-right: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.deadline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.delete-btn {
+    border: none;
+    background: none;
+    margin-top: 10px;
+    color: rgba(204, 41, 41, 0.6);
+}
+
+.delete-btn:hover {
+    transition-duration: .3s;
+    cursor: pointer;
+    color: #cc2929;
+}
+
+
+.form-container {
+    position: fixed;
+    z-index: 99;
+    width: 100vw;
+    height: 100vh;
+}
+
+.edit-form > label:first-child {
+    font-weight: 500;
+    border-bottom: 2px solid;
+    padding: 2px;
+    width: 100px;
+    text-align: center;
+}
+
+.edit-form > label {
+    margin-top: 10px;
+}
+
+.edit-form {
+    transition-duration: 1s;
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+.btns {
+    display: grid;
+    grid-template-columns: 50px 50px;
+}
+
+.arrow-right {
+    border: none;
+    background: none;
+    font-size: 25px;
+    color: #3a3a3a;
+    cursor: pointer;
+}
+
+.arrow-left {
+    border: none;
+    background: none;
+    font-size: 25px;
+    color: #3a3a3a;
+    cursor: pointer;
+}
+
+.edit-btn {
+    margin-top: 10px;
+    padding: 5px;
+
+    border: none;
+    background: none;
+}
+
+.edit-btn:hover {
+    color: #7c4e09;
+    transition-duration: .5s;
+}
+
+.reason {
+    margin-top: 5px;
+}
+
+.reason:before {
+    color: #7c4e09;
+    font-weight: 500;
+}
+
+.reason-input {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 10px;
+}
+
+.reason-input > input {
+    padding: 4px;
+    border-radius: 20px;
+    border: 1px solid #808080;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+.reason-input > button {
+    margin-top: 3px;
+    padding: 4px;
+    border-radius: 20px;
+    border: 1px solid #808080;
+    background-color: whitesmoke;
+}
+
+.reason-input > button:hover {
+    background-color: #3a3a3a;
+    color: white;
+    transition-duration: .5s;
+}
+
+.on-time {
+    color: green;
+    border-bottom: 1px solid green;
+}
+
+.not-on-time {
+    color: #cc2929;
+    border-bottom: 1px solid #cc2929;
+}
+
+.overdue {
+    margin-top: 10px;
+}

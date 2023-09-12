@@ -12,20 +12,64 @@ Vue.component('container', {
     },
     methods: {},
     mounted() {
-
+        eventBus.$on('move-note-to-next-col', (idNote, buffStatus) => {
+            if (buffStatus === 1) {
+                this.secondCol.push(this.firstCol[idNote])
+                this.firstCol.splice(idNote, 1)
+            } else if (buffStatus === 2) {
+                this.thirdCol.push(this.secondCol[idNote])
+                this.secondCol.splice(idNote, 1)
+            } else if (buffStatus === 3) {
+                this.fourthCol.push(this.thirdCol[idNote])
+                this.thirdCol.splice(idNote, 1)
+            }
+        });
+        eventBus.$on('move-back', (idNote) => {
+            this.thirdCol[idNote].reasons.push(this.thirdCol[idNote].reasonBuff);
+            this.secondCol.push(this.thirdCol[idNote])
+            this.thirdCol.splice(idNote, 1);
+        })
+        eventBus.$on('edit-note', (idNote, buffStatus) => {
+            this.isEdit = true;
+            eventBus.$on('edit-done', editNote => {
+                if (buffStatus === 1) {
+                    if (editNote.title) this.firstCol[idNote].title = editNote.title;
+                    if (editNote.description) this.firstCol[idNote].description = editNote.description;
+                    if (editNote.deadlineTime) this.firstCol[idNote].deadlineTime = editNote.deadlineTime;
+                    if (editNote.deadlineDate) this.firstCol[idNote].deadlineDate = editNote.deadlineDate;
+                    this.firstCol[idNote].editDate = editNote.editDate;
+                    this.firstCol[idNote].editTime = editNote.editTime;
+                } else if (buffStatus === 2) {
+                    if (editNote.title) this.secondCol[idNote].title = editNote.title;
+                    if (editNote.description) this.secondCol[idNote].description = editNote.description;
+                    if (editNote.deadlineTime) this.secondCol[idNote].deadlineTime = editNote.deadlineTime;
+                    if (editNote.deadlineDate) this.secondCol[idNote].deadlineDate = editNote.deadlineDate;
+                    this.secondCol[idNote].editDate = editNote.editDate;
+                    this.secondCol[idNote].editTime = editNote.editTime;
+                } else if (buffStatus === 3) {
+                    if (editNote.title) this.thirdCol[idNote].title = editNote.title;
+                    if (editNote.description) this.thirdCol[idNote].description = editNote.description;
+                    if (editNote.deadlineTime) this.thirdCol[idNote].deadlineTime = editNote.deadlineTime;
+                    if (editNote.deadlineDate) this.thirdCol[idNote].deadlineDate = editNote.deadlineDate;
+                    this.thirdCol[idNote].editDate = editNote.editDate;
+                    this.thirdCol[idNote].editTime = editNote.editTime;
+                }
+                this.isEdit = false;
+            })
+        })
 
     },
     template: `
-    <div>
-        <create-form v-if="!isEdit"></create-form>
-        <edit v-if="isEdit"></edit>
-        <div class="container">
-            <column1 v-if="!isEdit" class="column column1" :firstCol="firstCol"></column1>
-            <column2 v-if="!isEdit" class="column column2" :secondCol="secondCol"></column2>
-            <column3 v-if="!isEdit" class="column column3" :thirdCol="thirdCol"></column3>
-            <column4 v-if="!isEdit" class="column column4" :fourthCol="fourthCol"></column4>
-        </div>
-    </div>
+      <div>
+      <create-form v-if="!isEdit"></create-form>
+      <edit v-if="isEdit"></edit>
+      <div class="container">
+        <column1 v-if="!isEdit" class="column column1" :firstCol="firstCol"></column1>
+        <column2 v-if="!isEdit" class="column column2" :secondCol="secondCol"></column2>
+        <column3 v-if="!isEdit" class="column column3" :thirdCol="thirdCol"></column3>
+        <column4 v-if="!isEdit" class="column column4" :fourthCol="fourthCol"></column4>
+      </div>
+      </div>
     `,
 })
 
