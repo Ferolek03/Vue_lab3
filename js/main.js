@@ -165,6 +165,116 @@ Vue.component('column4', {
     `,
 })
 
+Vue.component('note', {
+    props: {
+        note: {
+            type: Object,
+        },
+        idNote: {
+            type: Number,
+        },
+        reasons: {
+            type: Array,
+        },
+        reason: {
+            type: String
+        },
+        isOverdue: {
+            type: String
+        },
+        timeCheck: {
+            type: Boolean
+        }
+    },
+    data() {
+        return {
+            taskTitle: null,
+            isDone: false,
+            doneNum: 0,
+            isReason: false,
+        }
+    },
+    methods: {
+        deleteNote(idNote) {
+            eventBus.$emit('delete-note', this.idNote)
+        },
+        moveNote(idNote) {
+            let buffStatus = this.note.statusCol++
+            eventBus.$emit('move-note-to-next-col', this.idNote, buffStatus)
+        },
+        moveBack(idNote) {
+            this.isReason = true
+        },
+        reasonBack(idNote) {
+            let buffStatus = this.note.statusCol--
+            this.isReason = false
+            eventBus.$emit('move-back', idNote, buffStatus)
+            this.note.reasonBuff = '';
+        },
+        editNote(idNote) {
+            let buffStatus = this.note.statusCol;
+            eventBus.$emit('edit-note', idNote, buffStatus)
+        }
+    },
+    mounted() {
+        let TimeData = new Date();
+        let noteDate = this.note.deadlineDate;
+        let noteTime = this.note.deadlineTime;
+        if (this.note.statusCol === 4) {
+            if (noteDate[0] >= TimeData.getFullYear() && noteDate[1] >= Number(TimeData.getMonth() + 1)
+                && noteDate[2] >= TimeData.getDay() && noteTime[0] >= TimeData.getHours() && noteTime[1] >= TimeData.getMinutes()) {
+                this.note.isOverdue = 'Completed on time';
+                this.note.timeCheck = true;
+            } else {
+                this.note.isOverdue = 'Not completed on time';
+                this.note.timeCheck = false;
+            }
+        }
+    },
+    template: `
+    <div class="todo-card todo-item">
+        <div class="todo-title">
+            <span>{{ note.title }}</span>
+        </div>
+        <div class="todo-description">
+            <span>{{ note.description }}</span>
+        </div>
+        <div v-if="!isReason" class="reason">
+            <li v-for="(reason, index) of note.reasons" :index="reason.key">reason - {{ reason }}</li>
+        </div>
+        <div class="todo-btns">
+            <button v-if="note.statusCol !== 4 && !isReason" @click="editNote(idNote)" class="edit-btn">Edit</button>
+            <button v-if="note.statusCol === 1" @click="deleteNote(idNote)" class="delete-btn">Delete</button>
+        </div>
+        <div class="date" v-if="note.date">
+            <span>Created at</span>
+            <span>{{ note.date }}</span>
+            <span>{{ note.time }}</span>
+        </div>
+        <div class="deadline">
+            <span>Deadline:</span>
+            <span>{{ note.deadlineDate }}</span>
+            <span>{{ note.deadlineTime }}</span>
+        </div>
+        <div v-if="note.editDate" class="deadline">
+            <span>Last edit:</span>
+            <span>{{ note.editDate }}</span>
+            <span>{{ note.editTime }}</span>
+        </div>
+        <div v-if="isReason" class="reason-input">
+            <input type="text" v-model="note.reasonBuff" placeholder="return reason">
+            <button @click="reasonBack(idNote)">Submit</button>
+        </div>
+        <div class="btns">
+            <button v-if="note.statusCol === 3" @click="moveBack(idNote)" class="arrow-left">&#8592;</button>
+            <button v-if="note.statusCol !== 4 && !isReason" @click="moveNote(idNote)" class="arrow-right">&#8594;</button>
+        </div>
+        <div class="overdue">
+            <div v-if="note.isOverdue !== ''"><span :class="{'on-time':note.timeCheck, 'not-on-time':!note.timeCheck}">{{ note.isOverdue }}</span></div>
+        </div>
+    </div>`,
+})
+
 Vue.component('edit', {
     methods: {
         formEdit() {
