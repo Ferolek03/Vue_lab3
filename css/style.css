@@ -339,3 +339,15 @@ form > input {
 .overdue {
     margin-top: 10px;
 }
+
+.per{
+    background-color: #cc2929;
+}
+
+.per1{
+    background-color: #7d6464;
+}
+
+.per2{
+    background-color: #11d3ff;
+}

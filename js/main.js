@@ -116,7 +116,7 @@ Vue.component('column2', {
     template: `
      <div>
         <span class="col-title">Процессе</span>
-        <note v-for="(note, index) in secondCol" @save="save()" :secondCol="secondCol" :key="note.key" :idNote="index" :note="note">
+        <note :class="{ per: secondCol.length }" v-for="(note, index) in secondCol" @save="save()" :secondCol="secondCol" :key="note.key" :idNote="index" :note="note">
           
         </note>
     </div>
@@ -137,7 +137,7 @@ Vue.component('column3', {
     template: `
      <div>
         <span class="col-title">Тестируется</span>
-        <note v-for="(note, index) in thirdCol" @save="save()" :thirdCol="thirdCol" :key="note.key" :idNote="index" :note="note">
+        <note :class="{ per1: thirdCol.length }"  v-for="(note, index) in thirdCol" @save="save()" :thirdCol="thirdCol" :key="note.key" :idNote="index" :note="note">
             
         </note>
     </div>
@@ -158,7 +158,7 @@ Vue.component('column4', {
     template: `
      <div>
         <span class="col-title">Выполнено</span>
-        <note v-for="(note, index) in fourthCol" @save="save()" :fourthCol="fourthCol" :key="note.key" :idNote="index" :note="note">
+        <note :class="{ per2: fourthCol.length }"  v-for="(note, index) in fourthCol" @save="save()" :fourthCol="fourthCol" :key="note.key" :idNote="index" :note="note">
             
         </note>
     </div>
